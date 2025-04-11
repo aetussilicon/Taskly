@@ -8,7 +8,7 @@ import java.util.List;
 public interface UsersService {
 
     UsersDTO create(CreateUpdateUserDTO signupDto);
-    UsersDTO update(CreateUpdateUserDTO signupDto);
+    UsersDTO update(CreateUpdateUserDTO updateDTO, String email);
     UsersDTO list(String email);
     List<UsersDTO> listAll();
     void delete(String email);

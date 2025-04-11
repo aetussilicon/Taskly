@@ -26,22 +26,23 @@ public class UsersControllerImpl implements UsersController {
     }
 
     @Override
-    public ResponseEntity<UsersDTO> update(CreateUpdateUserDTO signupDto) {
-        return null;
+    public ResponseEntity<UsersDTO> update(CreateUpdateUserDTO signupDto, String email) {
+        return new ResponseEntity<>(usersService.update(signupDto, email), HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<UsersDTO> list(String email) {
-        return null;
+        return new ResponseEntity<>(usersService.list(email), HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<List<UsersDTO>> listAll() {
-        return null;
+        return new ResponseEntity<>(usersService.listAll(), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<Void> delete(UUID id) {
-        return null;
+    public HttpStatus delete(String email) {
+        usersService.delete(email);
+        return HttpStatus.OK;
     }
 }

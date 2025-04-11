@@ -1,5 +1,7 @@
 package br.com.pionner.taskly.backend.application.services;
 
+import br.com.pionner.taskly.backend.domain.exceptions.UserAlreadyExistsInDB;
+import br.com.pionner.taskly.backend.domain.exceptions.UserNotFoundException;
 import br.com.pionner.taskly.backend.domain.models.Users;
 import br.com.pionner.taskly.backend.domain.models.dtos.CreateUpdateUserDTO;
 import br.com.pionner.taskly.backend.domain.models.dtos.UsersDTO;
@@ -23,7 +25,7 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public UsersDTO create(CreateUpdateUserDTO signupDto) {
         usersRepository.findByEmail(signupDto.email()).ifPresent(user -> {
-            throw new RuntimeException("Email already exists");
+            throw new UserAlreadyExistsInDB("Email already exists");
         });
 
         Users user = usersMapper.toEntity(signupDto);
@@ -34,22 +36,32 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public UsersDTO update(CreateUpdateUserDTO signupDto) {
-        return null;
+    public UsersDTO update(CreateUpdateUserDTO updateDTO, String email) {
+        Users toUpdate = usersRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);
+
+        toUpdate = usersMapper.partialUpdate(toUpdate, updateDTO);
+        toUpdate = usersRepository.save(toUpdate);
+
+        return usersMapper.toDto(toUpdate);
     }
 
     @Override
     public UsersDTO list(String email) {
-        return null;
+        return (usersMapper.toDto(
+                usersRepository.findByEmail(email).orElseThrow(UserNotFoundException::new)
+        ));
     }
 
     @Override
     public List<UsersDTO> listAll() {
-        return List.of();
+        return usersMapper.toDto(usersRepository.findAll());
     }
 
     @Override
     public void delete(String email) {
+        Users user = usersRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);
 
+        usersRepository.delete(user);
+        log.info("User {} deleted", email);
     }
 }

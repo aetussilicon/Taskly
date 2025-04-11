@@ -3,10 +3,7 @@ package br.com.pionner.taskly.backend.domain.ports.mappers;
 import br.com.pionner.taskly.backend.domain.models.Users;
 import br.com.pionner.taskly.backend.domain.models.dtos.CreateUpdateUserDTO;
 import br.com.pionner.taskly.backend.domain.models.dtos.UsersDTO;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingConstants;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -18,5 +15,8 @@ public interface UsersMapper {
     Users toEntity(CreateUpdateUserDTO signupDto);
     UsersDTO toDto(Users user);
     List<UsersDTO> toDto(List<Users> users);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    Users partialUpdate(@MappingTarget Users target, CreateUpdateUserDTO createUpdateUserDTO);
 
 }
