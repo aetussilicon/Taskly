@@ -1,7 +1,7 @@
 package br.com.pionner.taskly.backend.application.controllers;
 
-import br.com.pionner.taskly.backend.domain.models.dtos.SignupUserDTO;
-import br.com.pionner.taskly.backend.domain.models.dtos.UsersDto;
+import br.com.pionner.taskly.backend.domain.models.dtos.CreateUpdateUserDTO;
+import br.com.pionner.taskly.backend.domain.models.dtos.UsersDTO;
 import br.com.pionner.taskly.backend.domain.ports.controllers.UsersController;
 import br.com.pionner.taskly.backend.domain.ports.services.UsersService;
 import lombok.RequiredArgsConstructor;
@@ -21,22 +21,22 @@ public class UsersControllerImpl implements UsersController {
     private final UsersService usersService;
 
     @Override
-    public ResponseEntity<UsersDto> signup(SignupUserDTO signupDto) {
+    public ResponseEntity<UsersDTO> signup(CreateUpdateUserDTO signupDto) {
         return new ResponseEntity<>(usersService.create(signupDto), HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<UsersDto> update(SignupUserDTO signupDto) {
+    public ResponseEntity<UsersDTO> update(CreateUpdateUserDTO signupDto) {
         return null;
     }
 
     @Override
-    public ResponseEntity<UsersDto> list(String email) {
+    public ResponseEntity<UsersDTO> list(String email) {
         return null;
     }
 
     @Override
-    public ResponseEntity<List<UsersDto>> listAll() {
+    public ResponseEntity<List<UsersDTO>> listAll() {
         return null;
     }
 

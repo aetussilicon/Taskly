@@ -1,8 +1,8 @@
 package br.com.pionner.taskly.backend.domain.ports.mappers;
 
 import br.com.pionner.taskly.backend.domain.models.Users;
-import br.com.pionner.taskly.backend.domain.models.dtos.SignupUserDTO;
-import br.com.pionner.taskly.backend.domain.models.dtos.UsersDto;
+import br.com.pionner.taskly.backend.domain.models.dtos.CreateUpdateUserDTO;
+import br.com.pionner.taskly.backend.domain.models.dtos.UsersDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
@@ -15,8 +15,8 @@ import java.util.UUID;
 public interface UsersMapper {
 
     @Mapping(target = "userId", expression = "java(UUID.randomUUID())")
-    Users toEntity(SignupUserDTO signupDto);
-    UsersDto toDto(Users user);
-    List<UsersDto> toDto(List<Users> users);
+    Users toEntity(CreateUpdateUserDTO signupDto);
+    UsersDTO toDto(Users user);
+    List<UsersDTO> toDto(List<Users> users);
 
 }

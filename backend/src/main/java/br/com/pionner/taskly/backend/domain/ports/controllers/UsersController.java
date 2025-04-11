@@ -1,7 +1,7 @@
 package br.com.pionner.taskly.backend.domain.ports.controllers;
 
-import br.com.pionner.taskly.backend.domain.models.dtos.SignupUserDTO;
-import br.com.pionner.taskly.backend.domain.models.dtos.UsersDto;
+import br.com.pionner.taskly.backend.domain.models.dtos.CreateUpdateUserDTO;
+import br.com.pionner.taskly.backend.domain.models.dtos.UsersDTO;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,16 +12,16 @@ import java.util.UUID;
 public interface UsersController {
 
     @PostMapping("signup")
-    ResponseEntity<UsersDto> signup(@RequestBody @Valid SignupUserDTO signupDto);
+    ResponseEntity<UsersDTO> signup(@RequestBody @Valid CreateUpdateUserDTO signupDto);
 
     @PatchMapping("update")
-    ResponseEntity<UsersDto> update(@RequestBody @Valid SignupUserDTO signupDto);
+    ResponseEntity<UsersDTO> update(@RequestBody @Valid CreateUpdateUserDTO signupDto);
 
     @GetMapping
-    ResponseEntity<UsersDto> list(@RequestParam String email);
+    ResponseEntity<UsersDTO> list(@RequestParam String email);
 
     @GetMapping("all")
-    ResponseEntity<List<UsersDto>> listAll();
+    ResponseEntity<List<UsersDTO>> listAll();
 
     @DeleteMapping("delete/{userId}")
     ResponseEntity<Void> delete(@PathVariable UUID userId);

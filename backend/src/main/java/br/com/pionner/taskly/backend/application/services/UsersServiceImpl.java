@@ -1,8 +1,8 @@
 package br.com.pionner.taskly.backend.application.services;
 
 import br.com.pionner.taskly.backend.domain.models.Users;
-import br.com.pionner.taskly.backend.domain.models.dtos.SignupUserDTO;
-import br.com.pionner.taskly.backend.domain.models.dtos.UsersDto;
+import br.com.pionner.taskly.backend.domain.models.dtos.CreateUpdateUserDTO;
+import br.com.pionner.taskly.backend.domain.models.dtos.UsersDTO;
 import br.com.pionner.taskly.backend.domain.ports.mappers.UsersMapper;
 import br.com.pionner.taskly.backend.domain.ports.repositories.UsersRepository;
 import br.com.pionner.taskly.backend.domain.ports.services.UsersService;
@@ -21,7 +21,7 @@ public class UsersServiceImpl implements UsersService {
     private final UsersMapper usersMapper;
 
     @Override
-    public UsersDto create(SignupUserDTO signupDto) {
+    public UsersDTO create(CreateUpdateUserDTO signupDto) {
         usersRepository.findByEmail(signupDto.email()).ifPresent(user -> {
             throw new RuntimeException("Email already exists");
         });
@@ -34,17 +34,17 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public UsersDto update(SignupUserDTO signupDto) {
+    public UsersDTO update(CreateUpdateUserDTO signupDto) {
         return null;
     }
 
     @Override
-    public UsersDto list(String email) {
+    public UsersDTO list(String email) {
         return null;
     }
 
     @Override
-    public List<UsersDto> listAll() {
+    public List<UsersDTO> listAll() {
         return List.of();
     }
 
